@@ -1,5 +1,5 @@
-use std::io::{self, BufRead, ErrorKind, Write};
-use log;
+use std::io::{self, BufRead};
+
 
 use sqlite_rust::*;
 

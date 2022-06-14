@@ -40,12 +40,12 @@ pub fn input_db() {
 
 
 pub fn parse_input(input: &str) -> Result<InputParsed, InputError> {
-    let split= input.split(" ").collect::<Vec<&str>>();
+    let split= input.split(' ').collect::<Vec<&str>>();
 
     let input_action= split[0];
     let data= Box::new(split[1..].to_vec());
 
-    match &input_action[..] {
+    match input_action {
         "create" => Ok(InputParsed::new(InputAction::Create, data)),
         "delete" =>  Ok(InputParsed::new(InputAction::Delete, data)),
         "insert" =>  Ok(InputParsed::new(InputAction::Insert, data)),
