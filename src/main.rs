@@ -1,11 +1,12 @@
 use std::io::{self, BufRead};
-
-
 use sqlite_rust::*;
+
 
 
 fn main() {
     logger_builder();
+
+    let table= Table::new();
 
     let stdin= io::stdin();
 
