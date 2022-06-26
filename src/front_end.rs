@@ -42,9 +42,9 @@ impl fmt::Display for InputError {
 }
 
 
-pub fn input_db() {
+pub fn input_db<W: Write>(mut writer: W) {
     print!("db > ");
-    io::stdout().flush().unwrap();
+    writer.flush().unwrap();
 }
 
 
