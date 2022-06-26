@@ -1,7 +1,6 @@
 use std::io::{self, BufRead, Write};
 use std::str;
 use std::fmt;
-
 #[path="./back_end.rs"] mod back_end;
 pub use back_end::{Table, Row};
 mod test_front_end;
