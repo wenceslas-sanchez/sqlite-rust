@@ -1,3 +1,4 @@
+use core::fmt;
 use std::str;
 use serde::{Serialize, Deserialize};
 
@@ -38,5 +39,18 @@ impl Table {
     pub fn append(&mut self, row: Box<Row>) {
         self.num_element += 1;
         self.rows.push(row);
+    }
+}
+
+impl fmt::Display for Table {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let mut result_fmt= String::from("Table data:\n");
+        let rows= &self.rows;
+
+        for row in rows.iter() {
+            let row_str= format!("[{}, {}, {}]\n", row.id, row.username, row.email);
+            result_fmt.push_str(&row_str);
+        }
+        write!(f, "{}", result_fmt)
     }
 }
