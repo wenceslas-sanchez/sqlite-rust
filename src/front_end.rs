@@ -4,8 +4,10 @@ use std::fmt;
 
 #[path="./back_end.rs"] mod back_end;
 pub use back_end::{Table, Row};
+mod test_front_end;
 
-
+#[derive(PartialEq)]
+#[derive(Debug)]
 pub enum InputAction {
     Create,
     Delete,
@@ -14,6 +16,8 @@ pub enum InputAction {
     Exit,
 }
 
+#[derive(PartialEq)]
+#[derive(Debug)]
 pub struct InputParsed {
     pub action: InputAction,
     pub data: Box<Vec<String>>,
@@ -28,6 +32,7 @@ impl InputParsed {
     }
 }
 
+#[derive(Debug)]
 pub struct InputError;
 
 impl fmt::Display for InputError {
