@@ -1,13 +1,12 @@
 use core::fmt;
+use serde::{Deserialize, Serialize};
 use std::str;
-use serde::{Serialize, Deserialize};
-
 
 #[derive(Serialize, Deserialize)]
 pub struct Row {
     pub id: i8,
     pub username: String,
-    pub email: String
+    pub email: String,
 }
 
 #[derive(Default)]
@@ -16,9 +15,8 @@ pub struct Table {
     pub num_element: i8,
 }
 
-
 impl Row {
-    pub fn new(id: i8, username: String, email: String) -> Row{
+    pub fn new(id: i8, username: String, email: String) -> Row {
         Row {
             id,
             username,
@@ -27,12 +25,11 @@ impl Row {
     }
 }
 
-
 impl Table {
     pub fn new() -> Table {
         Table {
             rows: Vec::new(),
-            num_element: 0
+            num_element: 0,
         }
     }
 
@@ -44,11 +41,11 @@ impl Table {
 
 impl fmt::Display for Table {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let mut result_fmt= String::from("Table data:\n");
-        let rows= &self.rows;
+        let mut result_fmt = String::from("Table data:\n");
+        let rows = &self.rows;
 
         for row in rows.iter() {
-            let row_str= format!("[{}, {}, {}]\n", row.id, row.username, row.email);
+            let row_str = format!("[{}, {}, {}]\n", row.id, row.username, row.email);
             result_fmt.push_str(&row_str);
         }
         write!(f, "{}", result_fmt)
