@@ -6,7 +6,7 @@ use sqlite_rust::*;
 fn main() {
     logger_builder();
 
-    let table= Table::new();
+    let mut table= Table::new();
 
     let stdin= io::stdin();
 
@@ -23,7 +23,15 @@ fn main() {
             },
         };
 
-        execute_statement(result_input);
+        match execute_statement(result_input, &mut table) {
+          Ok(res) => println!("{}", res),
+          Err(res) => {
+                log::error!("Invalid command {}", res);
+                input_db();
+                continue;
+            },
+        };
+
         input_db();
     }
 }
