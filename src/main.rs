@@ -2,15 +2,15 @@ use std::io::{self, BufRead};
 use sqlite_rust::*;
 
 
-
 fn main() {
+    let mut writer= io::stdout();
     logger_builder();
 
     let mut table= Table::new();
 
     let stdin= io::stdin();
 
-    input_db();
+    input_db(&writer);
     for line in stdin.lock().lines() {
         let input= line.unwrap();
 
@@ -18,7 +18,7 @@ fn main() {
             Ok(res) => res,
             Err(res) => {
                 log::error!("Invalid command {}", res);
-                input_db();
+                input_db(&writer);
                 continue;
             },
         };
@@ -27,11 +27,11 @@ fn main() {
           Ok(res) => println!("{}", res),
           Err(res) => {
                 log::error!("Invalid command {}", res);
-                input_db();
+                input_db(&writer);
                 continue;
             },
         };
 
-        input_db();
+        input_db(&writer);
     }
 }
