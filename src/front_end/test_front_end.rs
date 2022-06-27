@@ -97,7 +97,7 @@ mod test_front_end_execute_statement {
         // Nothing happens for the moment
         let input_parsed= generate_input_parser("select", "1 test1 test2");
         let result= execute_statement(input_parsed, &mut table);
-        assert_eq!(result.unwrap(), 1);
+        assert_eq!(result.unwrap(), 0);
         assert_eq!(table.num_element, 0);
     }
 
