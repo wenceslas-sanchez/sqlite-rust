@@ -11,7 +11,7 @@ pub struct Row {
 
 #[derive(Default)]
 pub struct Table {
-    pub rows: Vec<Box<Row>>,
+    pub rows: Vec<String>,
     pub num_element: i8,
 }
 
@@ -33,7 +33,7 @@ impl Table {
         }
     }
 
-    pub fn append(&mut self, row: Box<Row>) {
+    pub fn append(&mut self, row: String) {
         self.num_element += 1;
         self.rows.push(row);
     }
@@ -45,7 +45,8 @@ impl fmt::Display for Table {
         let rows = &self.rows;
 
         for row in rows.iter() {
-            let row_str = format!("[{}, {}, {}]\n", row.id, row.username, row.email);
+            let deserialized: Row= serde_json::from_str(&row).unwrap();
+            let row_str = format!("[{}, {}, {}]\n", deserialized.id, deserialized.username, deserialized.email);
             result_fmt.push_str(&row_str);
         }
         write!(f, "{}", result_fmt)

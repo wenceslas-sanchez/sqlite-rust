@@ -57,6 +57,34 @@ pub fn parse_input(input: &str) -> Result<InputParsed, InputError> {
     }
 }
 
+pub fn execute_insert(input: InputParsed, table: &mut Table) -> Result<i8, InputError> {
+    let result_id = input.data[0].clone().parse::<i8>();
+    if result_id.is_err() {
+        return Err(InputError);
+    };
+
+    let row = Row::new(
+        result_id.unwrap(),
+        input.data[1].clone(),
+        input.data[2].clone(),
+    );
+    let serialized= serde_json::to_string(&row).unwrap();
+    table.append(serialized);
+
+    Ok(table.num_element)
+}
+
+pub fn execute_select(input: InputParsed, table: &mut Table) -> Result<i8, InputError> {
+    println!("{}", table);
+    Ok(table.num_element)
+}
+
+pub fn execute_exit() -> Result<i8, InputError> {
+    std::process::exit(0);
+    Ok(1)
+}
+
+
 pub fn execute_statement(input: InputParsed, table: &mut Table) -> Result<i8, InputError> {
     match input.action {
         InputAction::Create => {
@@ -68,28 +96,16 @@ pub fn execute_statement(input: InputParsed, table: &mut Table) -> Result<i8, In
             Ok(1)
         }
         InputAction::Insert => {
-            let result_id = input.data[0].clone().parse::<i8>();
-            if result_id.is_err() {
-                return Err(InputError);
-            };
-
-            let row = Row::new(
-                result_id.unwrap(),
-                input.data[1].clone(),
-                input.data[2].clone(),
-            );
-            table.append(Box::new(row));
-
             println!("Insert statement {:?}", input.data);
-            Ok(table.num_element)
+            execute_insert(input, table)
         }
         InputAction::Select => {
             println!("Select statement {:?}", input.data);
-            Ok(1)
+            execute_select(input, table)
         }
         InputAction::Exit => {
             println!("Exit statement");
-            std::process::exit(0);
+            execute_exit()
         }
     }
 }
