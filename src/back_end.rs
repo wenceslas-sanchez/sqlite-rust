@@ -9,9 +9,16 @@ pub struct Row {
     pub email: String,
 }
 
+#[derive(Clone)]
+pub struct Page {
+    pub elements: Vec<String>,
+    pub num_element: i8,
+}
+
 #[derive(Default)]
 pub struct Table {
-    pub rows: Vec<String>,
+    pub pages: Vec<Page>,
+    pub page_size: i8,
     pub num_element: i8,
 }
 
@@ -25,30 +32,68 @@ impl Row {
     }
 }
 
-impl Table {
-    pub fn new() -> Table {
-        Table {
-            rows: Vec::new(),
+impl Page {
+    pub fn new(element: Option<String>) -> Page {
+        let mut elements: Vec<String> = Vec::new();
+        if let Some(r) = element {
+            elements.push(r);
+        }
+        Page {
+            elements,
             num_element: 0,
         }
     }
 
-    pub fn append(&mut self, row: String) {
+    pub fn append(&mut self, element: String) {
         self.num_element += 1;
-        self.rows.push(row);
+        self.elements.push(element);
     }
 }
 
-impl fmt::Display for Table {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let mut result_fmt = String::from("Table data:\n");
-        let rows = &self.rows;
-
-        for row in rows.iter() {
-            let deserialized: Row= serde_json::from_str(&row).unwrap();
-            let row_str = format!("[{}, {}, {}]\n", deserialized.id, deserialized.username, deserialized.email);
-            result_fmt.push_str(&row_str);
+impl Table {
+    pub fn new(page_size: i8) -> Table {
+        Table {
+            pages: Vec::new(),
+            page_size,
+            num_element: 0,
         }
-        write!(f, "{}", result_fmt)
+    }
+
+    fn _push_new_page(&mut self, row: String) {
+        self.pages.push(
+            Page::new(Some(row))
+        );
+        self.num_element += 1;
+    }
+
+    pub fn append(&mut self, row: String) {
+        if self.pages.len() == 0 {
+            self._push_new_page(row);
+
+            return
+        }
+
+        let mut last_page= self.pages.last().cloned().unwrap();
+        if last_page.num_element < self.page_size {
+            last_page.append(row);
+            self.num_element += 1;
+            return
+        }
+
+        self._push_new_page(row);
     }
 }
+
+// impl fmt::Display for Table {
+//     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+//         let mut result_fmt = String::from("Table data:\n");
+//         let rows = &self.rows;
+//
+//         for row in rows.iter() {
+//             let deserialized: Row= serde_json::from_str(&row).unwrap();
+//             let row_str = format!("[{}, {}, {}]\n", deserialized.id, deserialized.username, deserialized.email);
+//             result_fmt.push_str(&row_str);
+//         }
+//         write!(f, "{}", result_fmt)
+//     }
+// }
