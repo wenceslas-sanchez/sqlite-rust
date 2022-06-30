@@ -5,7 +5,7 @@ fn main() {
     let mut writer = io::stdout();
     logger_builder();
 
-    let mut table = Table::new(2);
+    let mut table = Table::new(5);
 
     let stdin = io::stdin();
 
