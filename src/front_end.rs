@@ -75,7 +75,7 @@ pub fn execute_insert(input: InputParsed, table: &mut Table) -> Result<i8, Input
 }
 
 pub fn execute_select(input: InputParsed, table: &mut Table) -> Result<i8, InputError> {
-    // println!("{}", table);
+    println!("{}", table);
     Ok(table.num_element)
 }
 
