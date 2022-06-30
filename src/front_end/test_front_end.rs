@@ -52,7 +52,7 @@ mod test_front_end_parse_input {
 
 #[cfg(test)]
 mod test_front_end_execute_statement {
-    use crate::{execute_statement, InputParsed, parse_input, Table};
+    use crate::{execute_statement, parse_input, InputParsed, Table};
 
     fn generate_input_parser(action: &str, data: &str) -> InputParsed {
         parse_input(&*format!("{} {}", action, data)).unwrap()
@@ -63,18 +63,18 @@ mod test_front_end_execute_statement {
         let mut table = Table::new();
 
         // Only insert statement insert data.
-        let input_parsed= generate_input_parser("insert", "15 test3 test4 test5");
-        let result= execute_statement(input_parsed, &mut table);
+        let input_parsed = generate_input_parser("insert", "15 test3 test4 test5");
+        let result = execute_statement(input_parsed, &mut table);
         assert_eq!(result.unwrap(), 1);
         assert_eq!(table.num_element, 1);
 
-        let input_parsed= generate_input_parser("insert", "15 test3 test4 test5");
-        let result= execute_statement(input_parsed, &mut table);
+        let input_parsed = generate_input_parser("insert", "15 test3 test4 test5");
+        let result = execute_statement(input_parsed, &mut table);
         assert_eq!(result.unwrap(), 2);
         assert_eq!(table.num_element, 2);
 
-        let input_parsed= generate_input_parser("insert", "2 test6 test7 ");
-        let result= execute_statement(input_parsed, &mut table);
+        let input_parsed = generate_input_parser("insert", "2 test6 test7 ");
+        let result = execute_statement(input_parsed, &mut table);
         assert_eq!(result.unwrap(), 3);
         assert_eq!(table.num_element, 3);
     }
@@ -84,8 +84,8 @@ mod test_front_end_execute_statement {
         let mut table = Table::new();
 
         // Nothing happens for the moment
-        let input_parsed= generate_input_parser("create", "1 test1 test2");
-        let result= execute_statement(input_parsed, &mut table);
+        let input_parsed = generate_input_parser("create", "1 test1 test2");
+        let result = execute_statement(input_parsed, &mut table);
         assert_eq!(result.unwrap(), 1);
         assert_eq!(table.num_element, 0);
     }
@@ -95,8 +95,8 @@ mod test_front_end_execute_statement {
         let mut table = Table::new();
 
         // Nothing happens for the moment
-        let input_parsed= generate_input_parser("select", "1 test1 test2");
-        let result= execute_statement(input_parsed, &mut table);
+        let input_parsed = generate_input_parser("select", "1 test1 test2");
+        let result = execute_statement(input_parsed, &mut table);
         assert_eq!(result.unwrap(), 0);
         assert_eq!(table.num_element, 0);
     }
@@ -106,8 +106,8 @@ mod test_front_end_execute_statement {
         let mut table = Table::new();
 
         // Nothing happens for the moment
-        let input_parsed= generate_input_parser("delete", "1 test1 test2");
-        let result= execute_statement(input_parsed, &mut table);
+        let input_parsed = generate_input_parser("delete", "1 test1 test2");
+        let result = execute_statement(input_parsed, &mut table);
         assert_eq!(result.unwrap(), 1);
         assert_eq!(table.num_element, 0);
     }

@@ -68,7 +68,7 @@ pub fn execute_insert(input: InputParsed, table: &mut Table) -> Result<i8, Input
         input.data[1].clone(),
         input.data[2].clone(),
     );
-    let serialized= serde_json::to_string(&row).unwrap();
+    let serialized = serde_json::to_string(&row).unwrap();
     table.append(serialized);
 
     Ok(table.num_element)
@@ -83,7 +83,6 @@ pub fn execute_exit() -> Result<i8, InputError> {
     std::process::exit(0);
     Ok(1)
 }
-
 
 pub fn execute_statement(input: InputParsed, table: &mut Table) -> Result<i8, InputError> {
     match input.action {
