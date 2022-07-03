@@ -55,6 +55,7 @@ impl Page {
         self.num_element += 1;
         self.elements.push(element);
     }
+
 }
 
 impl Table {
@@ -94,6 +95,10 @@ impl Table {
         } else {
             self._push_new_page(row);
         }
+    }
+
+    pub fn deserialized(&self, index: usize) -> Page {
+        serde_json::from_str(&self.pages[index]).unwrap()
     }
 }
 
