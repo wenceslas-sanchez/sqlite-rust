@@ -1,23 +1,23 @@
 #[cfg(test)]
 mod test_back_end_page {
-    use std::str;
     use crate::back_end::Page;
+    use std::str;
 
     #[test]
     fn test_page_constructor() {
-        let page= Page::new(None);
+        let page = Page::new(None);
         assert_eq!(page.num_element, 0);
 
-        let data= String::from("okok");
-        let page= Page::new(Some(data.clone()));
+        let data = String::from("okok");
+        let page = Page::new(Some(data.clone()));
         assert_eq!(page.num_element, 1);
         assert_eq!(page.elements[0], data);
     }
 
     #[test]
     fn test_page_append() {
-        let mut page= Page::new(None);
-        let data= String::from("okok");
+        let mut page = Page::new(None);
+        let data = String::from("okok");
         page.append(data.clone());
         assert_eq!(page.num_element, 1);
         assert_eq!(page.elements[0], data);
@@ -26,23 +26,23 @@ mod test_back_end_page {
 
 #[cfg(test)]
 mod test_back_end_table {
-    use std::str;
     use crate::back_end::Table;
+    use std::str;
 
     #[test]
     fn test_table_constructor() {
-        let table= Table::new(2);
+        let table = Table::new(2);
         assert_eq!(table.page_size, 2);
         assert_eq!(table.num_element, 0);
     }
 
     #[test]
     fn test_table_append_good() {
-        let mut table= Table::new(2);
+        let mut table = Table::new(2);
 
-        let data1= String::from("okok1");
-        let data2= String::from("okok2");
-        let data3= String::from("okok3");
+        let data1 = String::from("okok1");
+        let data2 = String::from("okok2");
+        let data3 = String::from("okok3");
 
         table.append(data1.clone());
         assert_eq!(table.num_element, 1);
@@ -60,11 +60,11 @@ mod test_back_end_table {
     #[test]
     fn test_table_append_bad() {
         // No limitation
-        let mut table= Table::new(0);
+        let mut table = Table::new(0);
 
-        let data1= String::from("okok1");
-        let data2= String::from("okok2");
-        let data3= String::from("okok3");
+        let data1 = String::from("okok1");
+        let data2 = String::from("okok2");
+        let data3 = String::from("okok3");
 
         table.append(data1.clone());
         assert_eq!(table.num_element, 1);

@@ -60,7 +60,7 @@ mod test_front_end_execute_statement {
 
     #[test]
     fn test_execute_statement_insert_good() {
-        let mut table = Table::new();
+        let mut table = Table::new(2);
 
         // Only insert statement insert data.
         let input_parsed = generate_input_parser("insert", "15 test3 test4 test5");
@@ -81,7 +81,7 @@ mod test_front_end_execute_statement {
 
     #[test]
     fn test_execute_statement_create_good() {
-        let mut table = Table::new();
+        let mut table = Table::new(2);
 
         // Nothing happens for the moment
         let input_parsed = generate_input_parser("create", "1 test1 test2");
@@ -92,7 +92,7 @@ mod test_front_end_execute_statement {
 
     #[test]
     fn test_execute_statement_select_good() {
-        let mut table = Table::new();
+        let mut table = Table::new(2);
 
         // Nothing happens for the moment
         let input_parsed = generate_input_parser("select", "1 test1 test2");
@@ -103,7 +103,7 @@ mod test_front_end_execute_statement {
 
     #[test]
     fn test_execute_statement_delete_good() {
-        let mut table = Table::new();
+        let mut table = Table::new(2);
 
         // Nothing happens for the moment
         let input_parsed = generate_input_parser("delete", "1 test1 test2");
