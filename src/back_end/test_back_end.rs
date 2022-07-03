@@ -25,7 +25,7 @@ mod test_back_end_page {
 
 #[cfg(test)]
 mod test_back_end_table {
-    use crate::back_end::{Table, Page};
+    use crate::back_end::{Page, Table};
 
     #[test]
     fn test_table_constructor() {
@@ -49,8 +49,8 @@ mod test_back_end_table {
         table.append(data3.clone());
         assert_eq!(table.num_element, 3);
 
-        let pages_deserialized1: Page= table.deserialized(0);
-        let pages_deserialized2: Page= table.deserialized(1);
+        let pages_deserialized1: Page = table.deserialized(0);
+        let pages_deserialized2: Page = table.deserialized(1);
         assert_eq!(table.pages.len(), 2);
         assert_eq!(pages_deserialized1.elements[0], data1);
         assert_eq!(pages_deserialized1.elements[1], data2);
