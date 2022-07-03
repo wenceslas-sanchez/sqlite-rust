@@ -1,7 +1,6 @@
 #[cfg(test)]
 mod test_back_end_page {
     use crate::back_end::Page;
-    use std::str;
 
     #[test]
     fn test_page_constructor() {
@@ -27,7 +26,6 @@ mod test_back_end_page {
 #[cfg(test)]
 mod test_back_end_table {
     use crate::back_end::Table;
-    use std::str;
 
     #[test]
     fn test_table_constructor() {

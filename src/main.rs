@@ -2,7 +2,7 @@ use sqlite_rust::*;
 use std::io::{self, BufRead};
 
 fn main() {
-    let mut writer = io::stdout();
+    let writer = io::stdout();
     logger_builder();
 
     let mut table = Table::new(5);

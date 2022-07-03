@@ -1,7 +1,6 @@
 #[cfg(test)]
 mod test_front_end_parse_input {
     use crate::front_end::InputAction::{Create, Delete, Exit, Insert, Select};
-    use crate::front_end::InputError;
     use crate::parse_input;
 
     #[test]
